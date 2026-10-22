@@ -1,5 +1,7 @@
 import sqlite3
 from contextlib import closing
+
+
 with closing(get_conn()) as conn:
     with closing(conn.cursor()) as cursor:
         repartos = conn.execute(
