@@ -9,9 +9,7 @@ import pedidos
 import grafo
 
 
-# ---------------------------------------------------------------------------
 # Piezas opcionales (las de los compañeros que aún pueden no estar listas)
-# ---------------------------------------------------------------------------
 
 def _importar_opcional(*nombres):
     """Intenta importar un módulo por varios nombres posibles; None si falla."""
@@ -31,9 +29,7 @@ def _funcion(modulo, nombre):
     return getattr(modulo, nombre, None) if modulo else None
 
 
-# ---------------------------------------------------------------------------
 # Entrada de datos (con validación: el usuario se equivoca, la app no se cae)
-# ---------------------------------------------------------------------------
 
 def pedir_entero(mensaje, minimo=None, maximo=None, vacio_ok=False):
     """Pide un entero. Si vacio_ok y pulsa Enter, devuelve None."""
@@ -67,9 +63,7 @@ def pausa():
     input("\n(Enter para volver al menú) ")
 
 
-# ---------------------------------------------------------------------------
 # Opciones del menú
-# ---------------------------------------------------------------------------
 
 def ver_usuarios():
     pedidos.mostrar_usuarios()
@@ -184,9 +178,7 @@ def ver_turno():
         print(f"  - {reparto}")
 
 
-# ---------------------------------------------------------------------------
 # Menú principal
-# ---------------------------------------------------------------------------
 
 MENU = [
     ("Ver usuarios",                    ver_usuarios),
