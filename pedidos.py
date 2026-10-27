@@ -107,7 +107,7 @@ def mostrar_usuarios():
         conn.close()
 
 
-def plazas_con_platos():
+def restaurantes_con_platos():
     conn = conectar()
     try:
         nombres = {fila['restaurante'] for fila in conn.execute(
