@@ -70,27 +70,27 @@ def ver_usuarios():
 
 
 def ver_carta():
-    plazas = pedidos.plazas_con_platos()
-    if not plazas:
-        print("\nTodavía no hay platos dados de alta en ninguna plaza.")
+    restaurantes = pedidos.restaurantes_con_platos()
+    if not restaurantes:
+        print("\nTodavía no hay platos dados de alta en ningún restaurante.")
         return
-    plaza = elegir_de_lista("¿De qué plaza quieres ver la carta?", plazas)
-    pedidos.mostrar_platos(plaza)
+    restaurante = elegir_de_lista("¿De qué restaurante quieres ver la carta?", restaurantes)
+    pedidos.mostrar_platos(restaurante)
 
 
 def hacer_pedido():
-    plazas = pedidos.plazas_con_platos()
-    if not plazas:
+    restaurantes = pedidos.restaurantes_con_platos()
+    if not restaurantes:
         print("\nNo se puede pedir: todavía no hay platos dados de alta.")
         return
 
     pedidos.mostrar_usuarios()
     usuario_id = pedir_entero("\nID del usuario que pide: ", 1)
 
-    plaza = elegir_de_lista("¿En qué plaza quieres pedir?", plazas)
-    pedidos.mostrar_platos(plaza)
+    restaurante = elegir_de_lista("¿En qué restaurante quieres pedir?", restaurantes)
+    pedidos.mostrar_platos(restaurante)
 
-    # Un pedido recoge todos sus platos en la misma plaza.
+    # Un pedido recoge todos sus platos en el mismo restaurante.
     productos = []
     print("\nAñade platos (deja el ID vacío para terminar).")
     while True:
@@ -124,7 +124,7 @@ def _cargar_grafo():
         return grafo.construir_grafo()
     except Exception as error:
         print(f"\n✗ No se pudo cargar el mapa de rutas: {error!r}")
-        print("  Revisa que rutas.db exista y que los nombres de sus plazas")
+        print("  Revisa que rutas.db exista y que los nombres de sus restaurantes")
         print("  coincidan con los de grafo.NODOS.")
         return None
 
@@ -134,8 +134,8 @@ def calcular_ruta():
     if mapa is None:
         return
 
-    origen = elegir_de_lista("Plaza de ORIGEN:", grafo.NODOS)
-    destino = elegir_de_lista("Plaza de DESTINO:", grafo.NODOS)
+    origen = elegir_de_lista("Restaurante de ORIGEN:", grafo.NODOS)
+    destino = elegir_de_lista("Restaurante de DESTINO:", grafo.NODOS)
 
     camino, minutos = grafo.dijkstra(mapa, origen, destino)
     if not camino:
@@ -155,8 +155,8 @@ def rider_mas_cercano():
     if mapa is None:
         return
 
-    plaza = elegir_de_lista("¿A qué plaza debe llegar el rider (recogida)?", grafo.NODOS)
-    resultado = buscar(mapa, plaza)
+    restaurante = elegir_de_lista("¿A qué restaurante debe llegar el rider (recogida)?", grafo.NODOS)
+    resultado = buscar(mapa, restaurante)
     if not resultado:
         print("\nNo hay ningún rider disponible que pueda llegar.")
         return
@@ -182,7 +182,7 @@ def ver_turno():
 
 MENU = [
     ("Ver usuarios",                    ver_usuarios),
-    ("Ver carta de un plaza",          ver_carta),
+    ("Ver carta de un restaurante",     ver_carta),
     ("Hacer un pedido",                 hacer_pedido),
     ("Ver pedidos",                     ver_pedidos),
     ("Calcular ruta más rápida",        calcular_ruta),
